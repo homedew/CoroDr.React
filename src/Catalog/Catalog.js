@@ -1,5 +1,4 @@
 import { MDBContainer, MDBRow, MDBCol, MDBRipple, MDBIcon } from "mdb-react-ui-kit";
-import CatalogApiComponent from "../Services/Catalog/catalog.api";
 import React, { useState, useEffect, useRef } from 'react';
 import { get } from './apiHelpers';
 import CatalogItem from './CatalogItem';

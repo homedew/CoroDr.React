@@ -1,21 +1,17 @@
 {
-  "name": "corodr-react",
+  "name": "corodr.react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chec/commerce.js": "^2.8.0",
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "mdb-react-ui-kit": "^6.1.0",
-    "mdb-ui-kit": "^6.4.0",
-    "mdbreact": "^5.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
-    "react-lazy-load-image-component": "^1.6.0",
     "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
@@ -43,8 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/react-lazy-load-image-component": "^1.5.3"
   }
 }
