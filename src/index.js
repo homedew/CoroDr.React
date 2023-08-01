@@ -8,23 +8,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Catalog from "./Catalog/Catalog";
 import Login from "./Login/Login";
-
+import CatalogDetail from "./CatalogDetail/CatalogDetail";
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-  <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route
-          path="/Catalog"
-          element={<Catalog />}
-        />
-         <Route
-          path="/Login"
-          element={<Login />}
-        />
-      </Routes>
+    <BrowserRouter>
+     <App></App>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -3,13 +3,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import { get } from './apiHelpers';
 import CatalogItem from './CatalogItem';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+import {useNavigate} from 'react-router-dom';
 function Catalog() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const pageSize = 5; // Number of items to fetch per page
   const catalogRef = useRef();
  
+  const navigate = useNavigate();
+
+  const handleDetailsClick = (id) => {
+    // 👇️ navigate programmatically
+    navigate(`/details/${id}`);
+  };
 
   useEffect(() => {
     // Access the height of the Catalog component using the ref
@@ -55,7 +61,7 @@ function Catalog() {
           dataLength={data.length}
           next={() => setPage((prevPage) => prevPage + 1)}
           hasMore={page !== 0} // Set hasMore to false when there's no more data to load
-          loader={<div>Loading...</div>}
+          loader={<div></div>}
         >
 
           <section style={{ backgroundColor: '#eee' }}>
@@ -112,7 +118,11 @@ function Catalog() {
                             </div>
                             {product.freeShipping && <h6 className="text-success">Free shipping</h6>}
                             <div className="d-flex flex-column mt-4">
-                              <button className="btn btn-primary btn-sm" type="button">Details</button>
+                            <button
+                                className="btn btn-primary btn-sm"
+                                onClick={() => handleDetailsClick(product.id)}>
+                                Details
+                              </button>
                               <button className="btn btn-outline-primary btn-sm mt-2" type="button">
                                 Add to wishlist
                               </button>
