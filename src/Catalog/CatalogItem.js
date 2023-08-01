@@ -1,9 +1,7 @@
 import React from 'react';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBIcon } from 'mdb-react-ui-kit';
-import LazyLoad from 'react-lazy-load-image-component';
 
 const CatalogItem = ({ data }) => {
-    debugger;
     const getStars = () => {
         const stars = [];
         for (let i = 0; i < 5; i++) {
