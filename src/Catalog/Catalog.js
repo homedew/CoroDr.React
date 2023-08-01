@@ -22,7 +22,7 @@ function Catalog() {
 
   const fetchData = async () => {
     try {
-      const apiUrl = 'https://localhost:7073/';
+      const apiUrl = 'https://catalog-api.azurewebsites.net/';
       const endPoint = `api/v1/Catalog/items?pageSize=${pageSize}&pageIndex=${page}`;
 
       // First API call
