@@ -1,0 +1,15 @@
+.social-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .social-buttons-container > * {
+    width: 100%;
+    margin-bottom: 8px; /* Adjust as needed */
+  }
+
+  .social-buttons-container > .google-login {
+    width: 100% !important;
+  }
+  

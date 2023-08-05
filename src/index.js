@@ -9,14 +9,21 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Catalog from "./Catalog/Catalog";
 import Login from "./Login/Login";
 import CatalogDetail from "./CatalogDetail/CatalogDetail";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { CartProvider } from "./NavBar/CartContext";
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-     <App></App>
-    </BrowserRouter>
-  </React.StrictMode>
+  <GoogleOAuthProvider clientId="893672817687-m5660ivrk22q2250m9lo6g8ftfde1irf.apps.googleusercontent.com">
+    <React.StrictMode>
+      <BrowserRouter>
+      <CartProvider>
+        <App />
+      </CartProvider>
+      </BrowserRouter>
+    </React.StrictMode>
+  </GoogleOAuthProvider>,
+
 );
 
 // If you want to start measuring performance in your app, pass a function

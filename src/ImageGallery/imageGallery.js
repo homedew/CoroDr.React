@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 
 const ProductImageGallery = ({ images }) => {
   const dummyImageUrls = [
-    'https://dummyimage.com/200x200/000000/ffffff', // Black image with white background
-    'https://dummyimage.com/200x200/ff0000/ffffff', // Red image with white background
-    'https://dummyimage.com/200x200/00ff00/ffffff', // Green image with white background
-    'https://dummyimage.com/200x200/0000ff/ffffff', // Blue image with white background
-    // Add more dummy image URLs here...
+    'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(4).webp',
+    'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(4).webp',
+    'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(2).webp',
+    'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(5).webp'
   ];
   const [selectedImage, setSelectedImage] = useState(dummyImageUrls[0]);
 

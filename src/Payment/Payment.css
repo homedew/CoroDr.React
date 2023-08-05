@@ -1,0 +1,49 @@
+.payment-page {
+    padding: 20px;
+  }
+  
+  .address-form {
+    margin-bottom: 20px;
+  }
+  
+  /* Add margin between input fields */
+  .address-form .form-outline {
+    margin-bottom: 15px;
+  }
+  
+  .payment-methods {
+    margin-top: 30px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+  }
+  
+  .payment-methods h2 {
+    font-size: 18px;
+  }
+  
+  .payment-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .payment-icons .selected {
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .process-button {
+    margin-top: 20px;
+  }
+  
+  .order-summary {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .order-summary h2 {
+    font-size: 18px;
+  }
+  
