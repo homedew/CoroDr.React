@@ -21,15 +21,16 @@ import {
 import { Link } from 'react-router-dom';
 import { useCartContext } from "./CartContext";
 import axios from 'axios'; // Import Axios library
-
-const CoroDrNavbar = ({onSearch}) => {
+import { useNavigate } from 'react-router-dom';
+import { useSearchContext } from '../Searching/SearchContext';
+const CoroDrNavbar = ({ onSearch }) => {
   const [showNav, setShowNav] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
-  const userName = 'John Doe';
-  const [searchResults, setSearchResults] = useState([]);
   const { cartCount } = useCartContext();
-
+  const userLoggedIn = localStorage.getItem('user') !== null; // Check if user is logged in
+  const userName = userLoggedIn ? JSON.parse(localStorage.getItem('user')).name : ''; // Get username from localStorage
+  const navigate = useNavigate();
+  const { searchResults, setSearchResults } = useSearchContext();
   useEffect(() => {
     const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
     // setCartCount(storedProducts.length);
@@ -49,6 +50,13 @@ const CoroDrNavbar = ({onSearch}) => {
     }
   };
 
+  const handleSignOut = () => {
+    // Clear user info from localStorage and navigate to the sign-in page
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
+
+
   const handleSearch = async () => {
     try {
       const apiUrl = 'https://catalog-api.azurewebsites.net/';
@@ -56,8 +64,9 @@ const CoroDrNavbar = ({onSearch}) => {
       const pageSize = 10; // You can set pageSize as needed
       const endPoint = `api/v1/catalog/items/withname/${searchQuery}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
       const response = await axios.get(apiUrl + endPoint);
-      setSearchResults(response.data);
-      onSearch(response.data);
+      debugger;
+      setSearchResults(response.data.data);
+      onSearch(response.data.data);
       // Process the response as needed
     } catch (error) {
       console.error(error);
@@ -94,7 +103,7 @@ const CoroDrNavbar = ({onSearch}) => {
                       placeholder='Search'
                       value={searchQuery}
                       style={{ width: '600px' }}
-                      onChange={handleInputChange} 
+                      onChange={handleInputChange}
                     />
                     <MDBBtn onClick={handleSearch}>Search</MDBBtn>
                   </MDBInputGroup>
@@ -106,10 +115,18 @@ const CoroDrNavbar = ({onSearch}) => {
                         <MDBIcon icon='user' className='me-1' />
                         {userName}
                       </MDBDropdownToggle>
-                      <MDBDropdownMenu>
-                        <MDBDropdownItem href='/profile'>Profile</MDBDropdownItem>
-                        <MDBDropdownItem href='/orders'>Orders</MDBDropdownItem>
-                        <MDBDropdownItem href='/settings'>Settings</MDBDropdownItem>
+                      <MDBDropdownMenu className='dropdown-menu'>
+                        <MDBDropdownItem href='/profile' className='dropdown-item'>
+                          Profile
+                        </MDBDropdownItem>
+                        <div className='dropdown-divider'></div>
+                        <MDBDropdownItem onClick={() => navigate('/checkout')} className='dropdown-item'>
+                          Orders
+                        </MDBDropdownItem>
+                        <div className='dropdown-divider'></div>
+                        <MDBDropdownItem onClick={handleSignOut} className='dropdown-item'>
+                          Sign Out
+                        </MDBDropdownItem>
                       </MDBDropdownMenu>
                     </MDBDropdown>
                   ) : (
@@ -135,7 +152,7 @@ const CoroDrNavbar = ({onSearch}) => {
         </MDBNavbar>
       </div>
     </section>
-    
+
   );
 };
 

@@ -38,7 +38,9 @@ function Catalog({ searchResults }) {
       const endPoint = `api/v1/Catalog/items?pageSize=${pageSize}&pageIndex=${page}`;
 
       const response = await get(apiUrl, endPoint);
+      debugger;
       setData((prevData) => [...prevData, ...response.data]);
+      debugger;
       if (response.data.length === 0) {
         setPage(0);
       }
@@ -48,6 +50,7 @@ function Catalog({ searchResults }) {
   };
 
   useEffect(() => {
+    debugger;
     fetchData();
   }, [page]);
 
@@ -55,7 +58,7 @@ function Catalog({ searchResults }) {
     return (
       <div ref={catalogRef} className="Catalog">
         <InfiniteScroll
-          dataLength={items.length}
+          dataLength={searchResults.length > 0 ? searchResults.length : data.length}
           next={() => setPage((prevPage) => prevPage + 1)}
           hasMore={page !== 0}
           loader={<div></div>}
@@ -63,7 +66,7 @@ function Catalog({ searchResults }) {
           <section style={{ backgroundColor: '#eee' }}>
             <div className="row justify-content-center mb-3">
               <MDBRow>
-                {items.map((product) => (
+                {(searchResults.length > 0 ? searchResults : data).map((product) => (
                   <MDBCol
                     onClick={() => handleDetailsClick(product.id)}
                     key={product.id}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBIcon } from 'mdb-react-ui-kit';
 import './Payment.css';
-
+import { useNavigate } from 'react-router-dom';
 const Payment = () => {
     const [shippingAddress, setShippingAddress] = useState({
         country: '',
@@ -27,6 +27,7 @@ const Payment = () => {
         total: 0,
     });
 
+    const navigate = useNavigate();
     useEffect(() => {
         const storedOrderSummary = JSON.parse(localStorage.getItem('orderSummary')) || {
             items: 0,
@@ -38,6 +39,7 @@ const Payment = () => {
     }, []);
 
     useEffect(() => {
+
         const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
         const itemCount = storedProducts.length;
         const subtotal = storedProducts.reduce((total, product) => total + product.price, 0);
@@ -67,6 +69,13 @@ const Payment = () => {
         setShowPaymentMethods(true);
     };
 
+
+    const handlePaymentSuccess = () => {
+        // Perform payment logic here
+        // If payment is successful, navigate to the success page
+        navigate('/success');
+    };
+
     const handlePaymentMethodSelect = (method) => {
         setSelectedPaymentMethod(method);
     };
@@ -74,12 +83,12 @@ const Payment = () => {
     const handleCardInfoChange = (e) => {
         const { name, value } = e.target;
         if (name === 'cardExpiry') {
-          const [month, year] = value.split('/');
-          setCardInfo((prevCardInfo) => ({ ...prevCardInfo, cardExpiryMonth: month, cardExpiryYear: year }));
+            const [month, year] = value.split('/');
+            setCardInfo((prevCardInfo) => ({ ...prevCardInfo, cardExpiryMonth: month, cardExpiryYear: year }));
         } else {
-          setCardInfo((prevCardInfo) => ({ ...prevCardInfo, [name]: value }));
+            setCardInfo((prevCardInfo) => ({ ...prevCardInfo, [name]: value }));
         }
-      };
+    };
     return (
         <MDBContainer className="payment-page">
             <MDBRow>
@@ -130,7 +139,7 @@ const Payment = () => {
                                     </div>
                                 </div>
                             )}
-                            <MDBBtn color="success" className="process-button">
+                            <MDBBtn color="success" className="process-button" onClick={handlePaymentSuccess}>
                                 Continue to Place Your Order
                             </MDBBtn>
                         </div>
